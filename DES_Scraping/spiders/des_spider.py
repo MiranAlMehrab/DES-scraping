@@ -3,40 +3,22 @@ import scrapy
 from DES_Scraping.items import DESItem
 from scrapy.loader import ItemLoader 
 
-
 class DesSpider(scrapy.Spider):
     name = "des"
-
-    start_urls = [
-        'https://www.dse.com.bd/latest_share_price_scroll_l.php'
-    ]
+    start_urls = ['https://www.dse.com.bd/latest_share_price_scroll_l.php']
 
     def parse(self, response):
         
-        requested_page = response.url.split("/")[-2]        
-        # table = response.xpath(".//table[@class = 'table table-bordered background-white shares-table fixedHeader']/*")
-        # print('-----------------len-----------------')
-        # print(len(table))
-
-        # tbody_counter = 0
-        # for tbody in table:
-            
-        #     tbody_counter += 1
-
+        requested_page = response.url.split("/")[-2]
         table_rows = response.xpath("//table[@class = 'table table-bordered background-white shares-table fixedHeader']/*")
+        first_row_of_table = response.xpath("//table[@class = 'table table-bordered background-white shares-table fixedHeader']/tbody/tr/*")
         
-        for i in range(2, len(table_rows)):
-
-            print('----------------------------------- look here -----------------------------------: '+str(i))
-            print(table_rows[i].xpath('./*'))
+        for i in range(1, len(table_rows)):    
             
-            # if i == 1:
-            #     row_tds = table_rows[i].xpath('./*') 
-            #     print(len(table_rows[i].xpath('./*')))
+            row_tds = None
+            if i == 1: row_tds = first_row_of_table
+            else: row_tds = table_rows[i].xpath('./*')
             
-            row_tds = table_rows[i].xpath('./*')
-            print(len(table_rows[i].xpath('./*')))
-
             try:
                 item = DESItem()
 
@@ -58,7 +40,7 @@ class DesSpider(scrapy.Spider):
                 print("Oops!", sys.exc_info()[0], "occurred.")
         
             
-    def fetch_table_row_with_whitespace():
+    def fetch_table_row_with_whitespaces():
         yield {
                 "data": response.xpath("//tr").extract_first()
             }
