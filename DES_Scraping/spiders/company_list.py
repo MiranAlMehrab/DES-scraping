@@ -34,34 +34,3 @@ class DesSpider(scrapy.Spider):
                 item['trading_code'] = pair[0] 
                 
                 yield item
-
-
-            # company_code = body_content.xpath('./*')[0]
-            # company_full_name = body_content.xpath('./*')[1]
-
-            # print(company_code.xpath('text()'))
-            # company = company.xpath('text()').get()
-            # company = company.encode('ascii','ignore')
-            # print('one item: '+ company)
-
-            # break
-            
-        print('<------------------------------------------------------------- look here ------------------------------------------------------------->')
-        
-        # for i in range(1, len(main_div)):    
-            
-        #     div_tds = None
-        #     if i == 1: div_tds = first_div_of_table
-        #     else: div_tds = main_div[i].xpath('./*')
-            
-        #     try:
-        #         item = DESItem()
-
-        #         item['name'] = (div_tds[1].xpath("text()").extract_first()).strip()
-        #         item['last_traded_price'] = div_tds[2].xpath("text()").extract_first()
-                
-        #         yield item
-
-        #     except:
-        #         raise Exception("exception occurred")
-        #         print("Oops!", sys.exc_info()[0], "occurred.")

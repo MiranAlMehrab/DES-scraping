@@ -38,9 +38,3 @@ class DesSpider(scrapy.Spider):
             except:
                 raise Exception("exception occurred")
                 print("Oops!", sys.exc_info()[0], "occurred.")
-        
-            
-    def fetch_table_row_with_whitespaces():
-        yield {
-                "data": response.xpath("//tr").extract_first()
-            }
