@@ -134,11 +134,12 @@ from datetime import datetime, timedelta
 
 
 x= datetime.today()
+#Per day at 1 am
 # y = x.replace(day=x.day, hour=1, minute=0, second=0, microsecond=0) + timedelta(days=1)
-y = x + timedelta(seconds=5)
+#every 10 seconds
+y = x + timedelta(seconds=10)
 
 delta_t=y-x
-# print ("working....")
 secs=delta_t.total_seconds()
 
 process = CrawlerProcess(get_project_settings())
