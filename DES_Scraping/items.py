@@ -1,9 +1,6 @@
 import scrapy
-from scrapy.loader.processors import MapCompose, TakeFirst
-from w3lib.html import remove_tags   
 
-class DESItem(scrapy.Item):
-
+class LatestItem(scrapy.Item):
     # date = scrapy.Field()
     trading_code = scrapy.Field()
     last_traded_price = scrapy.Field()
@@ -16,3 +13,10 @@ class DESItem(scrapy.Item):
     trade = scrapy.Field()
     value_mn = scrapy.Field()
     volume = scrapy.Field()
+
+
+
+class CompanyItem(scrapy.Item):
+    name = scrapy.Field()
+    category = scrapy.Field()
+    trading_code = scrapy.Field()

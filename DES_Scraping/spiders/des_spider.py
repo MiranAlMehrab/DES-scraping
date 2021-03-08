@@ -1,10 +1,10 @@
 import sys
 import scrapy
-from DES_Scraping.items import DESItem
-from scrapy.loader import ItemLoader 
+from scrapy.loader import ItemLoader
+from DES_Scraping.items import LatestItem
 
 class DesSpider(scrapy.Spider):
-    name = "des"
+    name = "latest"
     start_urls = ['https://www.dse.com.bd/latest_share_price_scroll_l.php']
 
     def parse(self, response):
@@ -20,7 +20,7 @@ class DesSpider(scrapy.Spider):
             else: row_tds = table_rows[i].xpath('./*')
             
             try:
-                item = DESItem()
+                item = LatestItem()
 
                 item['trading_code'] = (row_tds[1].xpath(".//a/text()").extract_first()).strip()
                 item['last_traded_price'] = row_tds[2].xpath("text()").extract_first()
