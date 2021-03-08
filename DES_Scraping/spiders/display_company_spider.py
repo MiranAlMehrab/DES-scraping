@@ -16,15 +16,20 @@ class DisplayCompanySpider(scrapy.Spider):
         company_name = company_name.encode('ascii','ignore').strip()
 
         tables = response.xpath('//table[@id="company"]')
-        table_items = tables[2].xpath('./tr/*')
+        first_table_items = tables[2].xpath('./tr/*')
+        second_table_items = tables[10].xpath('./tr/*')
 
-        sector = table_items[-2].xpath('text()').get().encode('ascii','ignore').strip()
-        total_no_of_outstanding_securities = table_items[-4].xpath('text()').get().encode('ascii','ignore').strip()
+
+        company_category = second_table_items[3].xpath('text()').get().encode('ascii','ignore').strip()
+
+        sector = first_table_items[-2].xpath('text()').get().encode('ascii','ignore').strip()
+        total_no_of_outstanding_securities = first_table_items[-4].xpath('text()').get().encode('ascii','ignore').strip()
                 
         try:
             item = DisplayCompanyItem()
 
-            item['sector'] = sector 
+            item['sector'] = sector
+            item['category'] = company_category
             item['name'] = company_name
             item['total_no_of_outstanding_securities'] = total_no_of_outstanding_securities
             

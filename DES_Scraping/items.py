@@ -25,4 +25,5 @@ class CompanyItem(scrapy.Item):
 class DisplayCompanyItem(scrapy.Item): 
     name = scrapy.Field()
     sector = scrapy.Field()
+    category = scrapy.Field()
     total_no_of_outstanding_securities = scrapy.Field()
