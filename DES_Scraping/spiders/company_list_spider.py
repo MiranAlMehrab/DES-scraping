@@ -7,6 +7,7 @@ class CompanySpider(scrapy.Spider):
     name = "companies"
     start_urls = ['https://www.dse.com.bd/company_listing.php']
 
+    
     def parse(self, response):
         
         requested_page = response.url.split("/")[-2]
@@ -28,9 +29,19 @@ class CompanySpider(scrapy.Spider):
             name_code_pairs = zip(items[0:][::2], items[1:][::2])
             for pair in name_code_pairs:
                 item = CompanyItem()
+                
+                pair = list(pair)
+                print(type(pair))
 
+                if ' ' in pair[0]: pair = self.swap_values(pair)
                 item['name'] = pair[1].strip('()')
                 item['category'] = category
-                item['trading_code'] = pair[0] 
+                item['trading_code'] = pair[0]
                 
                 yield item
+
+    def swap_values(self, values):
+        temp = values[0]
+        values[0] = values[1]
+        values[1] = temp
+        return values
