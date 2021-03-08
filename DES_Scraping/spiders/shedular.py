@@ -125,15 +125,15 @@ from apscheduler.schedulers.twisted import TwistedScheduler
 from scrapy.crawler import CrawlerRunner
 from scrapy.utils.log import configure_logging
 from scrapy.utils.project import get_project_settings
-from twisted.internet import reactor
 from scrapy.crawler import CrawlerProcess
 
-from DES_Scraping.spiders.des_spider import DesSpider
+from DES_Scraping.spiders.latest_share_spider import LatestSpider
+from DES_Scraping.spiders.company_list_spider import CompanySpider
 import sched, time
 from datetime import datetime, timedelta
 
 
-x= datetime.today()
+x = datetime.today()
 #Per day at 1 am
 # y = x.replace(day=x.day, hour=1, minute=0, second=0, microsecond=0) + timedelta(days=1)
 #every 10 seconds
@@ -144,7 +144,8 @@ secs=delta_t.total_seconds()
 
 process = CrawlerProcess(get_project_settings())
 sched = TwistedScheduler()
-sched.add_job(process.crawl, 'interval', args=[DesSpider], seconds=secs)
+sched.add_job(process.crawl, 'interval', args=[LatestSpider], seconds=secs)
+sched.add_job(process.crawl, 'interval', args=[CompanySpider], seconds=secs)
 sched.start()
 process.start(False)  
 

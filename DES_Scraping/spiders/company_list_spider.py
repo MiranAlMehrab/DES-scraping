@@ -3,7 +3,7 @@ import scrapy
 from scrapy.loader import ItemLoader 
 from DES_Scraping.items import CompanyItem
 
-class DesSpider(scrapy.Spider):
+class CompanySpider(scrapy.Spider):
     name = "companies"
     start_urls = ['https://www.dse.com.bd/company_listing.php']
 

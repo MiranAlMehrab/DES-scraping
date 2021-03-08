@@ -3,8 +3,8 @@ import scrapy
 from scrapy.loader import ItemLoader
 from DES_Scraping.items import LatestItem
 
-class DesSpider(scrapy.Spider):
-    name = "latest"
+class LatestSpider(scrapy.Spider):
+    name = "latest_share"
     start_urls = ['https://www.dse.com.bd/latest_share_price_scroll_l.php']
 
     def parse(self, response):
